@@ -1,0 +1,728 @@
+{
+  "info": {
+    "name": "Currency Converter SOAP Service",
+    "description": "Professional SOAP and REST API for currency conversion with comprehensive testing scenarios",
+    "version": "2.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "soapUrl",
+      "value": "http://localhost:3000/wsdl",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SOAP Operations",
+      "item": [
+        {
+          "name": "Convert Currency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ConvertCurrencyRequest>\n      <cc:fromCurrency>USD</cc:fromCurrency>\n      <cc:toCurrency>EUR</cc:toCurrency>\n      <cc:amount>100</cc:amount>\n    </cc:ConvertCurrencyRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency - Large Amount",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ConvertCurrencyRequest>\n      <cc:fromCurrency>USD</cc:fromCurrency>\n      <cc:toCurrency>JPY</cc:toCurrency>\n      <cc:amount>10000</cc:amount>\n    </cc:ConvertCurrencyRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency - Same Currency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ConvertCurrencyRequest>\n      <cc:fromCurrency>USD</cc:fromCurrency>\n      <cc:toCurrency>USD</cc:toCurrency>\n      <cc:amount>100</cc:amount>\n    </cc:ConvertCurrencyRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency - Invalid Currency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ConvertCurrencyRequest>\n      <cc:fromCurrency>INVALID</cc:fromCurrency>\n      <cc:toCurrency>EUR</cc:toCurrency>\n      <cc:amount>100</cc:amount>\n    </cc:ConvertCurrencyRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency - Missing Parameters",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ConvertCurrencyRequest>\n      <cc:fromCurrency>USD</cc:fromCurrency>\n      <cc:toCurrency>EUR</cc:toCurrency>\n    </cc:ConvertCurrencyRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Currencies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetAllCurrencies"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <GetAllCurrencies/>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Exchange Rate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/UpdateExchangeRate"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:UpdateExchangeRateRequest>\n      <cc:currencyCode>EUR</cc:currencyCode>\n      <cc:newRate>0.90</cc:newRate>\n    </cc:UpdateExchangeRateRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conversion History",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetConversionHistory"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:GetConversionHistoryRequest>\n      <cc:limit>5</cc:limit>\n    </cc:GetConversionHistoryRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conversion History - Filtered",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetConversionHistory"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:GetConversionHistoryRequest>\n      <cc:limit>10</cc:limit>\n      <cc:fromCurrency>USD</cc:fromCurrency>\n      <cc:toCurrency>EUR</cc:toCurrency>\n    </cc:GetConversionHistoryRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Currency Rate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetCurrencyRate"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:GetCurrencyRateRequest>\n      <cc:currencyCode>EUR</cc:currencyCode>\n    </cc:GetCurrencyRateRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Currency Statistics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetCurrencyStatistics"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <GetCurrencyStatistics/>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Currency Code - Valid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ValidateCurrencyCode"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ValidateCurrencyCodeRequest>\n      <cc:currencyCode>EUR</cc:currencyCode>\n    </cc:ValidateCurrencyCodeRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Currency Code - Invalid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/ValidateCurrencyCode"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cc=\"http://currency-converter.com/types\">\n  <soap:Header/>\n  <soap:Body>\n    <cc:ValidateCurrencyCodeRequest>\n      <cc:currencyCode>INVALID</cc:currencyCode>\n    </cc:ValidateCurrencyCodeRequest>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Supported Currencies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "http://currency-converter.com/GetSupportedCurrencies"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <GetSupportedCurrencies/>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": {
+              "raw": "{{soapUrl}}",
+              "host": ["{{soapUrl}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "REST API",
+      "item": [
+        {
+          "name": "Get All Currencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/currencies",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "currencies"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromCurrency\": \"USD\",\n  \"toCurrency\": \"EUR\",\n  \"amount\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/convert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Convert Currency - Multiple Currencies",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromCurrency\": \"GBP\",\n  \"toCurrency\": \"JPY\",\n  \"amount\": 50\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/convert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Exchange Rate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newRate\": 0.88\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/currencies/EUR/rate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "currencies", "EUR", "rate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conversion History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/conversions?limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "conversions"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conversion History - Filtered",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/conversions?limit=10&fromCurrency=USD&toCurrency=EUR",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "conversions"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "fromCurrency",
+                  "value": "USD"
+                },
+                {
+                  "key": "toCurrency",
+                  "value": "EUR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Currency Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "statistics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Currency Code - Valid",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/validate/EUR",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "validate", "EUR"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Currency Code - Invalid",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/validate/INVALID",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "validate", "INVALID"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Supported Currencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/supported",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "supported"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/docs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "docs"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Error Testing",
+      "item": [
+        {
+          "name": "REST - Missing Parameters",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromCurrency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/convert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REST - Invalid Currency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromCurrency\": \"INVALID\",\n  \"toCurrency\": \"EUR\",\n  \"amount\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/convert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REST - Negative Amount",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromCurrency\": \"USD\",\n  \"toCurrency\": \"EUR\",\n  \"amount\": -100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/convert",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "convert"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REST - Non-existent Currency",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newRate\": 0.88\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/currencies/INVALID/rate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "currencies", "INVALID", "rate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "REST - 404 Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/nonexistent",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "nonexistent"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set timestamp for request tracking",
+          "pm.globals.set('timestamp', new Date().toISOString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Basic response validation",
+          "pm.test('Response time is less than 5000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});",
+          "",
+          "pm.test('Response has timestamp', function () {",
+          "    const responseJson = pm.response.json();",
+          "    pm.expect(responseJson).to.have.property('timestamp');",
+          "});",
+          "",
+          "// Log response for debugging",
+          "console.log('Response:', pm.response.text());"
+        ]
+      }
+    }
+  ]
+}
