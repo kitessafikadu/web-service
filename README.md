@@ -45,7 +45,7 @@ The service can be easily extended for real-world applications such as authentic
 | **Node.js** | JavaScript runtime |
 | **Postman** | API testing tool |
 | **ts-node-dev** | For running the server with hot reload |
-| **Maven / npm** | Dependency management (npm in this case) |
+| **npm** | Dependency management |
 
 ---
 
@@ -74,7 +74,7 @@ ts-web-service/
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/<your-username>/ts-web-service.git
+git clone https://github.com/kitessafikadu/web-service.git
 cd ts-web-service
 npm install
 ````
