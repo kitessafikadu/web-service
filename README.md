@@ -20,7 +20,7 @@ This project demonstrates how to design, implement, and test modern APIs using N
 ## 🧩 About
 
 This project was created as part of an assignment to explore **web service development in TypeScript**.  
-It includes RESTful API endpoints that perform basic **CRUD operations** for users.  
+It includes RESTful API endpoints that perform basic **CRUD operations** for students.  
 
 The service can be easily extended for real-world applications such as authentication, database integration, and API documentation using Swagger.
 
@@ -53,7 +53,7 @@ The service can be easily extended for real-world applications such as authentic
 
 ```
 
-ts-web-service/
+web-service/
 ├── src/
 │   ├── index.ts
 │   └── routes/
@@ -75,7 +75,7 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/kitessafikadu/web-service.git
-cd ts-web-service
+cd web-service
 npm install
 ````
 
@@ -107,16 +107,19 @@ You should see:
 
 | Method     | Endpoint         | Description               |
 | ---------- | ---------------- | ------------------------- |
-| **GET**    | `/api/users`     | Fetch all users           |
-| **GET**    | `/api/users/:id` | Get a specific user by ID |
-| **POST**   | `/api/users`     | Add a new user            |
-| **DELETE** | `/api/users/:id` | Delete a user (optional)  |
+| **GET**    | `/api/students`     | Fetch all users           |
+| **GET**    | `/api/students/:id` | Get a specific user by ID |
+| **POST**   | `/api/students`     | Add a new user            |
+| **DELETE** | `/api/students/:id` | Delete a user (optional)  |
 
-### Example `POST /api/users` Request
+### Example `POST /api/student` Request
 
 ```json
 {
-  "name": "Kitessa Fikadu"
+  "firstName": "Abebe",
+  "lastName": "Kebede",
+  "email": "abe@gmail.com",
+  "dob": "1990-05-15"
 }
 ```
 
@@ -124,8 +127,13 @@ You should see:
 
 ```json
 {
-  "id": 1730012345,
-  "name": "Kitessa Fikadu"
+    "id": 5,
+    "firstName": "Abebe",
+    "lastName": "Kebede",
+    "email": "abe@gmail.com",
+    "dob": "1990-05-15T00:00:00.000Z",
+    "createdAt": "2025-10-23T18:50:07.467Z",
+    "updatedAt": "2025-10-23T18:50:07.467Z"
 }
 ```
 
@@ -137,8 +145,8 @@ You should see:
 2. Create a new **collection** named *TypeScript Web Service*.
 3. Add requests:
 
-   * `GET http://localhost:3000/api/users`
-   * `POST http://localhost:3000/api/users`
+   * `GET http://localhost:3000/api/students`
+   * `POST http://localhost:3000/api/students`
 4. Send requests and verify the JSON responses.
 
 
