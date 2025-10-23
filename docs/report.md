@@ -54,6 +54,14 @@ Comprehensive implementation of Web Services including RESTful APIs and SOAP-bas
 **Step 1: Project Setup**
 ```bash
 ```
+**▶️ Running the Server**
+
+Starting the development server using:
+
+```bash
+npm run dev
+```
+![Get students](support/get-students.jpg)
 
 ### 🧮 SOAP Service Development
 
