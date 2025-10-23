@@ -52,15 +52,33 @@ The service can be easily extended for real-world applications such as authentic
 ## 📁 Project Structure
 
 ```
-
 web-service/
-├── src/
-│   ├── index.ts
-│   └── routes/
-│       └── userRoutes.ts
-├── package.json
-├── tsconfig.json
-└── README.md
+    ├── README.md
+    ├── package.json
+    ├── prisma.config.ts
+    ├── prisma/
+    │   ├── schema.prisma
+    │   └── migrations/
+    │       ├── migration_lock.toml
+    │       ├── 20251023172642_init/
+    │       │   └── migration.sql
+    │       └── 20251023175601_addtables/
+    │           └── migration.sql
+    └── src/
+        ├── server.ts
+        ├── controllers/
+        │   ├── courseController.ts
+        │   ├── enrollmentController.ts
+        │   ├── studentController.ts
+        │   └── teacherController.ts
+        ├── prisma/
+        │   └── client.ts
+        └── routes/
+            ├── courseRoutes.ts
+            ├── enrollmentRoutes.ts
+            ├── studentRoutes.ts
+            └── teacherRoutes.ts
+
 
 ````
 
