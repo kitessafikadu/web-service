@@ -125,10 +125,10 @@ You should see:
 
 | Method     | Endpoint         | Description               |
 | ---------- | ---------------- | ------------------------- |
-| **GET**    | `/api/students`     | Fetch all users           |
-| **GET**    | `/api/students/:id` | Get a specific user by ID |
-| **POST**   | `/api/students`     | Add a new user            |
-| **DELETE** | `/api/students/:id` | Delete a user (optional)  |
+| **GET**    | `/api/students`     | Fetch all students           |
+| **GET**    | `/api/students/:id` | Get a specific student by ID |
+| **POST**   | `/api/students`     | Add a new student            |
+| **DELETE** | `/api/students/:id` | Delete a student (optional)  |
 
 ### Example `POST /api/student` Request
 
