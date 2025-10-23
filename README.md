@@ -82,8 +82,8 @@ web-service/
 
 ````
 
-- `index.ts` → Application entry point  
-- `userRoutes.ts` → Contains REST API routes for users  
+- `server.ts` → Application entry point  
+- `routes` → Contains REST API routes for users  
 
 ---
 
