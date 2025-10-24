@@ -27,6 +27,29 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello from TypeScript Node.js server with .env!");
 });
 
+// Health check endpoint
+app.get("/health", async (req: Request, res: Response) => {
+  try {
+    // Test database connection
+    await prisma.$queryRaw`SELECT 1`;
+    
+    res.status(200).json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      database: "connected",
+      version: "1.0.0"
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: "unhealthy",
+      timestamp: new Date().toISOString(),
+      database: "disconnected",
+      error: "Database connection failed"
+    });
+  }
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`Server is running at http://${HOST}:${PORT}`);
 });
