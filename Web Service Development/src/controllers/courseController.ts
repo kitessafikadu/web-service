@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import prisma from "../prisma/client.ts";
 
-// 📚 Get all courses
+//  Get all courses
 export const getAllCourses = async (req: Request, res: Response) => {
   try {
     const { name, code, sortBy = "name" } = req.query;
@@ -128,7 +128,7 @@ export const updateCourse = async (req: Request, res: Response) => {
     });
 
     res.json({
-      message: "✅ Course updated successfully",
+      message: " Course updated successfully",
       data: course,
     });
   } catch (error: any) {
@@ -150,7 +150,7 @@ export const deleteCourse = async (req: Request, res: Response) => {
     }
 
     await prisma.course.delete({ where: { id } });
-    res.json({ message: "✅ Course deleted successfully" });
+    res.json({ message: "Course deleted successfully" });
   } catch (error: any) {
     console.error(error);
     if (error.code === "P2025") {
