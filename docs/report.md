@@ -245,26 +245,29 @@ Content-Type: application/json
 **Sample Request (XML):**
 
 ```xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <ConvertCurrency xmlns="http://example.com/currency">
-      <amount>100</amount>
-      <from>USD</from>
-      <to>ETB</to>
-    </ConvertCurrency>
-  </soap:Body>
-</soap:Envelope>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ws="http://www.currencyconverter.com/wsdl">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:ConvertCurrency>
+         <fromCurrency>USD</fromCurrency>
+         <toCurrency>ETB</toCurrency>
+         <amount>1034</amount>
+      </ws:ConvertCurrency>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
 
 **Sample Response (XML):**
 
 ```xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <ConvertCurrencyResponse xmlns="http://example.com/currency">
-      <result>5700.00</result>
-    </ConvertCurrencyResponse>
-  </soap:Body>
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:tns="http://www.currencyconverter.com/wsdl">
+    <soap:Body>
+        <tns:ConvertCurrencyResponse>
+            <tns:result>118393</tns:result>
+        </tns:ConvertCurrencyResponse>
+    </soap:Body>
 </soap:Envelope>
 ```
 
