@@ -241,4 +241,3 @@ This project is created for educational purposes as part of a web services assig
 
 ---
 
-**Built with ❤️ by the Web Services Development Team**
