@@ -185,16 +185,16 @@ Content-Type: application/json
 }
 ```
 
-**Sample Error Response:**
+**Sample Error Response**
 
 ```json
-{}
+{
+  "error": " Email already exists"
+}
 ```
 
 **Screenshot of the request**
 ![POST Student Request](support/add-student.jpg)
-
-![GET Students Response](support/get-students.jpg)
 
 **Sample Request - Update Student**
 
@@ -213,13 +213,26 @@ Content-Type: application/json
 **Sample Response**
 
 ```json
-{}
+{
+  "message": "✅ Student created successfully",
+  "data": {
+    "id": 11,
+    "firstName": "Chaltu",
+    "lastName": "Fikadu",
+    "email": "chali@gmail.com",
+    "dob": "1990-05-15T00:00:00.000Z",
+    "createdAt": "2025-10-24T07:35:49.962Z",
+    "updatedAt": "2025-10-24T07:35:49.962Z"
+  }
+}
 ```
 
 **Sample Error Response:**
 
 ```json
-{}
+{
+  "error": "Student not found"
+}
 ```
 
 **Screenshot of the request**
