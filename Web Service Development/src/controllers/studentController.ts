@@ -26,11 +26,26 @@ import prisma from "../prisma/client.ts";
  */
 export const getAllStudents = async (req: Request, res: Response) => {
   try {
+    const { firstName, lastName, sortBy = "firstName", order = "asc" } = req.query;
+
+    
+    const filters: any = {};
+    if (firstName) {
+      filters.firstName = { contains: String(firstName), mode: "insensitive" };
+    }
+    if (lastName) {
+      filters.lastName = { contains: String(lastName), mode: "insensitive" };
+    }
+
+    // Fetch students 
     const students = await prisma.student.findMany({
+      where: filters,
       include: { enrollments: true },
+      orderBy: { [String(sortBy)]: order === "desc" ? "desc" : "asc" },
     });
+
     res.json({
-      message: "✅ All students fetched successfully",
+      message: "✅ Students fetched successfully",
       count: students.length,
       data: students,
     });
@@ -39,7 +54,6 @@ export const getAllStudents = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch students" });
   }
 };
-
 /**
  * @swagger
  * /students/{id}:
