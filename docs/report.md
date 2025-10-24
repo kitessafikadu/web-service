@@ -284,9 +284,8 @@ Content-Type: application/json
 </soap:Envelope>
 ```
 
-**Screenshot Example:**
+**Screenshot Example**
 ![SOAP ConvertCurrency Request](support/soap-request.jpg)
-![SOAP ConvertCurrency Response](support/soap-response.jpg)
 
 ---
 
