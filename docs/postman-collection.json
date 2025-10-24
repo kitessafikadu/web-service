@@ -1,0 +1,284 @@
+{
+  "info": {
+    "name": "Web Services Assignment Collection",
+    "description": "Complete collection for testing both RESTful and SOAP web services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "RESTful API - Student Management",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["students"]
+            }
+          }
+        },
+        {
+          "name": "Get Student by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/students/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["students", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create New Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"dob\": \"1995-03-15\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3002/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["students"]
+            }
+          }
+        },
+        {
+          "name": "Update Student",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"email\": \"jane.smith@example.com\",\n  \"dob\": \"1995-03-15\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3002/students/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["students", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Student",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/students/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["students", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get All Teachers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/teachers",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["teachers"]
+            }
+          }
+        },
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["courses"]
+            }
+          }
+        },
+        {
+          "name": "Get All Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/enrollments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["enrollments"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SOAP API - Currency Converter",
+      "item": [
+        {
+          "name": "Convert USD to EUR",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "urn:ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n                  xmlns:ws=\"http://www.currencyconverter.com/wsdl\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:ConvertCurrency>\n         <fromCurrency>USD</fromCurrency>\n         <toCurrency>EUR</toCurrency>\n         <amount>100</amount>\n      </ws:ConvertCurrency>\n   </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": {
+              "raw": "http://localhost:8000/wsdl",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["wsdl"]
+            }
+          }
+        },
+        {
+          "name": "Convert EUR to GBP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "urn:ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n                  xmlns:ws=\"http://www.currencyconverter.com/wsdl\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:ConvertCurrency>\n         <fromCurrency>EUR</fromCurrency>\n         <toCurrency>GBP</toCurrency>\n         <amount>100</amount>\n      </ws:ConvertCurrency>\n   </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": {
+              "raw": "http://localhost:8000/wsdl",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["wsdl"]
+            }
+          }
+        },
+        {
+          "name": "Convert USD to ETB",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "urn:ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n                  xmlns:ws=\"http://www.currencyconverter.com/wsdl\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:ConvertCurrency>\n         <fromCurrency>USD</fromCurrency>\n         <toCurrency>ETB</toCurrency>\n         <amount>100</amount>\n      </ws:ConvertCurrency>\n   </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": {
+              "raw": "http://localhost:8000/wsdl",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["wsdl"]
+            }
+          }
+        },
+        {
+          "name": "Convert Invalid Currency (Error Test)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              },
+              {
+                "key": "SOAPAction",
+                "value": "urn:ConvertCurrency"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\n                  xmlns:ws=\"http://www.currencyconverter.com/wsdl\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <ws:ConvertCurrency>\n         <fromCurrency>USD</fromCurrency>\n         <toCurrency>INVALID</toCurrency>\n         <amount>100</amount>\n      </ws:ConvertCurrency>\n   </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": {
+              "raw": "http://localhost:8000/wsdl",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["wsdl"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3002",
+      "type": "string"
+    },
+    {
+      "key": "soapUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
