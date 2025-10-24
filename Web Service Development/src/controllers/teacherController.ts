@@ -3,15 +3,29 @@
 import type { Request, Response } from "express";
 import prisma from "../prisma/client.ts";
 
-// 👨‍🏫 Get all teachers
+//  Get all teachers
 export const getAllTeachers = async (req: Request, res: Response) => {
   try {
+    const { firstName, lastName, sortBy = "firstName", order = "asc" } = req.query;
+
+   
+    const filters: any = {};
+    if (firstName) {
+      filters.firstName = { contains: String(firstName), mode: "insensitive" };
+    }
+    if (lastName) {
+      filters.lastName = { contains: String(lastName), mode: "insensitive" };
+    }
+
+   
     const teachers = await prisma.teacher.findMany({
+      where: filters,
       include: { courses: true },
+      orderBy: { [String(sortBy)]: order === "desc" ? "desc" : "asc" },
     });
 
     res.json({
-      message: "✅ All teachers fetched successfully",
+      message: " Teachers fetched successfully",
       count: teachers.length,
       data: teachers,
     });
@@ -21,7 +35,7 @@ export const getAllTeachers = async (req: Request, res: Response) => {
   }
 };
 
-// 🔍 Get teacher by ID
+//  Get teacher by ID
 export const getTeacherById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -36,7 +50,7 @@ export const getTeacherById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Teacher not found" });
 
     res.json({
-      message: "✅ Teacher fetched successfully",
+      message: " Teacher fetched successfully",
       data: teacher,
     });
   } catch (error) {
@@ -61,7 +75,7 @@ export const createTeacher = async (req: Request, res: Response) => {
     });
 
     res.status(201).json({
-      message: "✅ Teacher created successfully",
+      message: "Teacher created successfully",
       data: teacher,
     });
   } catch (error: any) {
