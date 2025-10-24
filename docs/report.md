@@ -274,13 +274,21 @@ Content-Type: application/json
 **Sample Fault Response:**
 
 ```xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <soap:Fault>
-      <faultcode>Client</faultcode>
-      <faultstring>Unsupported currency code</faultstring>
-    </soap:Fault>
-  </soap:Body>
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:tns="http://www.currencyconverter.com/wsdl">
+    <soap:Body>
+        <soap:Fault>
+            <soap:Code>
+                <soap:Value>SOAP-ENV:Server</soap:Value>
+                <soap:Subcode>
+                    <soap:Value>InternalServerError</soap:Value>
+                </soap:Subcode>
+            </soap:Code>
+            <soap:Reason>
+                <soap:Text>Error: Conversion rate not found for ETB -&gt; CNYU</soap:Text>
+            </soap:Reason>
+        </soap:Fault>
+    </soap:Body>
 </soap:Envelope>
 ```
 
