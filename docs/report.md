@@ -259,7 +259,7 @@ Content-Type: application/json
 </soapenv:Envelope>
 ```
 
-**Sample Response (XML):**
+**Sample Response (XML)**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
