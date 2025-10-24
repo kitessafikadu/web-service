@@ -1,4 +1,4 @@
-// src/controllers/teacherController.ts
+
 
 import type { Request, Response } from "express";
 import prisma from "../prisma/client.ts";
@@ -59,7 +59,7 @@ export const getTeacherById = async (req: Request, res: Response) => {
   }
 };
 
-// ✏️ Create new teacher
+//  Create new teacher
 export const createTeacher = async (req: Request, res: Response) => {
   try {
     const { firstName, lastName, email } = req.body;
@@ -88,7 +88,7 @@ export const createTeacher = async (req: Request, res: Response) => {
   }
 };
 
-// 🔄 Update teacher
+//  Update teacher
 export const updateTeacher = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -114,7 +114,7 @@ export const updateTeacher = async (req: Request, res: Response) => {
     });
 
     res.json({
-      message: "✅ Teacher updated successfully",
+      message: "Teacher updated successfully",
       data: teacher,
     });
   } catch (error: any) {
@@ -127,7 +127,7 @@ export const updateTeacher = async (req: Request, res: Response) => {
   }
 };
 
-// 🗑️ Delete teacher
+//  Delete teacher
 export const deleteTeacher = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -135,7 +135,7 @@ export const deleteTeacher = async (req: Request, res: Response) => {
 
     await prisma.teacher.delete({ where: { id } });
 
-    res.json({ message: "✅ Teacher deleted successfully" });
+    res.json({ message: "Teacher deleted successfully" });
   } catch (error: any) {
     console.error(error);
     if (error.code === "P2025") {
