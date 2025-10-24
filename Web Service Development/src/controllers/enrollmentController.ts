@@ -42,7 +42,7 @@ export const createEnrollment = async (req: Request, res: Response) => {
 
     const studentIdNum = Number(studentId);
     const courseIdNum = Number(courseId);
-    const gradeNum = grade !== undefined ? Number(grade) : null;
+    const gradeNum = grade ;
 
     if (isNaN(studentIdNum) || isNaN(courseIdNum) || (grade !== undefined && isNaN(gradeNum))) {
       return res.status(400).json({ error: "Invalid numeric values for studentId, courseId, or grade" });
