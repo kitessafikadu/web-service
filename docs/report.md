@@ -157,7 +157,7 @@ node soapServer.js
 
 ### 🧾 RESTful Student Management API
 
-**Sample Request (Add Student)**
+**Sample Request - Add Student**
 
 ```http
 POST /students
@@ -193,7 +193,37 @@ Content-Type: application/json
 
 **Screenshot of the request**
 ![POST Student Request](support/add-student.jpg)
+
 ![GET Students Response](support/get-students.jpg)
+
+**Sample Request - Update Student**
+
+```http
+PUT /students/:id
+Content-Type: application/json
+
+{
+  "firstName": "Daniel",
+  "lastName": "Beyen",
+  "email": "dani@example.com",
+  "dob": "2000-05-15"
+}
+```
+
+**Sample Response**
+
+```json
+{}
+```
+
+**Sample Error Response:**
+
+```json
+{}
+```
+
+**Screenshot of the request**
+![POST Student Request](support/update student.png)
 
 ---
 
