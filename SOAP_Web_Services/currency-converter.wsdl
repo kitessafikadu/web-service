@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CurrencyConverterService"
+  targetNamespace="http://www.currencyconverter.com/wsdl"
+  xmlns:tns="http://www.currencyconverter.com/wsdl"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <message name="ConvertCurrencyRequest">
+    <part name="fromCurrency" type="xsd:string"/>
+    <part name="toCurrency" type="xsd:string"/>
+    <part name="amount" type="xsd:float"/>
+  </message>
+
+  <message name="ConvertCurrencyResponse">
+    <part name="result" type="xsd:float"/>
+  </message>
+
+  <portType name="CurrencyConverterPortType">
+    <operation name="ConvertCurrency">
+      <input message="tns:ConvertCurrencyRequest"/>
+      <output message="tns:ConvertCurrencyResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="CurrencyConverterBinding" type="tns:CurrencyConverterPortType">
+    <soap:binding style="rpc"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ConvertCurrency">
+      <soap:operation soapAction="urn:ConvertCurrency"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:currencyconverter"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:currencyconverter"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="CurrencyConverterService">
+    <documentation>Currency Converter SOAP Service</documentation>
+    <port name="CurrencyConverterPort" binding="tns:CurrencyConverterBinding">
+      <soap:address location="http://localhost:8000/wsdl"/>
+    </port>
+  </service>
+</definitions>

@@ -1,18 +1,24 @@
 import type { Request, Response } from "express";
 import prisma from "../prisma/client.ts";
 
+// 📚 Get all courses
 export const getAllCourses = async (req: Request, res: Response) => {
   try {
     const courses = await prisma.course.findMany({
       include: { teacher: true, enrollments: true },
     });
-    res.json(courses);
+    res.json({
+      message: "✅ All courses fetched successfully",
+      count: courses.length,
+      data: courses,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch courses" });
   }
 };
 
+// 🔍 Get course by ID
 export const getCourseById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -29,19 +35,25 @@ export const getCourseById = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Course not found" });
     }
 
-    res.json(course);
+    res.json({
+      message: "✅ Course fetched successfully",
+      data: course,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch course" });
   }
 };
 
+// ✏️ Create new course
 export const createCourse = async (req: Request, res: Response) => {
   try {
     const { name, code, teacherId } = req.body;
 
     if (!name || !code || !teacherId) {
-      return res.status(400).json({ error: "Name, code, and teacherId are required" });
+      return res
+        .status(400)
+        .json({ error: "Name, code, and teacherId are required" });
     }
 
     const teacherIdNumber = Number(teacherId);
@@ -53,11 +65,13 @@ export const createCourse = async (req: Request, res: Response) => {
       data: { name, code, teacherId: teacherIdNumber },
     });
 
-    res.status(201).json(course);
+    res.status(201).json({
+      message: "✅ Course created successfully",
+      data: course,
+    });
   } catch (error: any) {
     console.error(error);
     if (error.code === "P2002") {
-      // Unique constraint failed
       res.status(409).json({ error: "Course code already exists" });
     } else {
       res.status(500).json({ error: "Failed to create course" });
@@ -65,6 +79,7 @@ export const createCourse = async (req: Request, res: Response) => {
   }
 };
 
+// 🔄 Update course
 export const updateCourse = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -74,7 +89,11 @@ export const updateCourse = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Invalid course ID" });
     }
     if (!name && !code && !teacherId) {
-      return res.status(400).json({ error: "At least one field (name, code, teacherId) is required" });
+      return res
+        .status(400)
+        .json({
+          error: "At least one field (name, code, teacherId) is required",
+        });
     }
 
     const data: any = {};
@@ -93,20 +112,21 @@ export const updateCourse = async (req: Request, res: Response) => {
       data,
     });
 
-    res.json(course);
+    res.json({
+      message: "✅ Course updated successfully",
+      data: course,
+    });
   } catch (error: any) {
     console.error(error);
-    if (error.code === "P2025") {
-      // Record not found
+    if (error.code === "P2002") {
       res.status(404).json({ error: "Course not found" });
-    } else if (error.code === "P2002") {
-      res.status(409).json({ error: "Course code already exists" });
-    } else {
+    }  else {
       res.status(500).json({ error: "Failed to update course" });
     }
   }
 };
 
+// 🗑️ Delete course
 export const deleteCourse = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -115,7 +135,7 @@ export const deleteCourse = async (req: Request, res: Response) => {
     }
 
     await prisma.course.delete({ where: { id } });
-    res.json({ message: "Course deleted successfully" });
+    res.json({ message: "✅ Course deleted successfully" });
   } catch (error: any) {
     console.error(error);
     if (error.code === "P2025") {
