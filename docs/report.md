@@ -1,6 +1,6 @@
 # 🧾 Web Services Implementation - Assignment 1 Report
 
-## 👥 Team Members & Task Distribution
+## 👥 Team Members
 
 | No. | Student Name         | ID No     | Department           |
 | --- | -------------------- | --------- | -------------------- |
@@ -28,6 +28,7 @@ The assignment consists of two main parts:
 2. [Implementation Steps](#2-implementation-steps)
 3. [Tools and Technologies Used](#3-tools-and-technologies-used)
 4. [Results and Observations](#4-results-and-observations)
+5. [Conclusion](#5-conclusion)
 
 ---
 
@@ -146,7 +147,7 @@ node soapServer.js
 | **Programming Language** | JavaScript (Node.js)     | Backend implementation       |
 | **Framework**            | Express.js               | REST API development         |
 | **SOAP Library**         | `soap` (Node.js package) | SOAP service creation        |
-| **Testing Tool**         | Postman / SOAP UI        | API and SOAP request testing |
+| **Testing Tool**         | Postman                  | API and SOAP request testing |
 | **Runtime Environment**  | Node.js                  | Code execution environment   |
 | **Data Formats**         | JSON (REST), XML (SOAP)  | Data exchange formats        |
 | **Version Control**      | Git & GitHub             | Source code management       |
@@ -306,7 +307,7 @@ Content-Type: application/json
 
 ---
 
-## ✅ Conclusion
+## 5. Conclusion
 
 This assignment provided hands-on experience in designing and implementing **RESTful** and **SOAP** web services.
 It enhanced our understanding of:
