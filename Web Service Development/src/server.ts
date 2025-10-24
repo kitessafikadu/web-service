@@ -6,13 +6,17 @@ import studentRoutes from "./routes/studentRoutes.ts";
 import teacherRoutes from "./routes/teacherRoutes.ts";
 import courseRoutes from "./routes/courseRoutes.ts";
 import enrollmentRoutes from "./routes/enrollmentRoutes.ts";
+import { setupSwagger } from "./config/swagger.ts";
 dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
 app.use(express.json());
-const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3002;
 const HOST: string = process.env.HOST || "localhost";
+
+// Setup Swagger documentation
+setupSwagger(app);
 
 app.use("/students", studentRoutes);
 app.use("/teachers", teacherRoutes);

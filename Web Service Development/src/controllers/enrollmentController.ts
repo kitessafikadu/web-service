@@ -56,7 +56,7 @@ export const createEnrollment = async (req: Request, res: Response) => {
 
     const studentIdNum = Number(studentId);
     const courseIdNum = Number(courseId);
-    const gradeNum = grade !== undefined ? Number(grade) : null;
+    const gradeNum = grade ;
 
     if (
       isNaN(studentIdNum) ||
