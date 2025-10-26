@@ -1,14 +1,29 @@
 import type { Request, Response } from "express";
 import prisma from "../prisma/client.ts";
 
-// 📚 Get all courses
+//  Get all courses
 export const getAllCourses = async (req: Request, res: Response) => {
   try {
+    const { name, code, sortBy = "name" } = req.query;
+
+   
+    const filters: any = {};
+    if (name) {
+      filters.name = { contains: String(name), mode: "insensitive" };
+    }
+    if (code) {
+      filters.code = { contains: String(code), mode: "insensitive" };
+    }
+
+    // Fetch courses 
     const courses = await prisma.course.findMany({
+      where: filters,
       include: { teacher: true, enrollments: true },
+      orderBy: { [sortBy as string]: "asc" }, 
     });
+
     res.json({
-      message: "✅ All courses fetched successfully",
+      message: " All courses fetched successfully",
       count: courses.length,
       data: courses,
     });
@@ -18,7 +33,7 @@ export const getAllCourses = async (req: Request, res: Response) => {
   }
 };
 
-// 🔍 Get course by ID
+//  Get course by ID
 export const getCourseById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -36,7 +51,7 @@ export const getCourseById = async (req: Request, res: Response) => {
     }
 
     res.json({
-      message: "✅ Course fetched successfully",
+      message: "Course fetched successfully",
       data: course,
     });
   } catch (error) {
@@ -45,7 +60,7 @@ export const getCourseById = async (req: Request, res: Response) => {
   }
 };
 
-// ✏️ Create new course
+//  Create new course
 export const createCourse = async (req: Request, res: Response) => {
   try {
     const { name, code, teacherId } = req.body;
@@ -66,7 +81,7 @@ export const createCourse = async (req: Request, res: Response) => {
     });
 
     res.status(201).json({
-      message: "✅ Course created successfully",
+      message: " Course created successfully",
       data: course,
     });
   } catch (error: any) {
@@ -79,7 +94,7 @@ export const createCourse = async (req: Request, res: Response) => {
   }
 };
 
-// 🔄 Update course
+//  Update course
 export const updateCourse = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -113,7 +128,7 @@ export const updateCourse = async (req: Request, res: Response) => {
     });
 
     res.json({
-      message: "✅ Course updated successfully",
+      message: " Course updated successfully",
       data: course,
     });
   } catch (error: any) {
@@ -126,7 +141,7 @@ export const updateCourse = async (req: Request, res: Response) => {
   }
 };
 
-// 🗑️ Delete course
+//  Delete course
 export const deleteCourse = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -135,7 +150,7 @@ export const deleteCourse = async (req: Request, res: Response) => {
     }
 
     await prisma.course.delete({ where: { id } });
-    res.json({ message: "✅ Course deleted successfully" });
+    res.json({ message: "Course deleted successfully" });
   } catch (error: any) {
     console.error(error);
     if (error.code === "P2025") {
