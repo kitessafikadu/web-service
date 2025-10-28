@@ -99,7 +99,6 @@ cd ..
 ```bash
 cd RESTful-web-service
 npm run dev
-# Server runs on http://localhost:3002
 ```
 
 **Start SOAP Service:**
@@ -107,7 +106,6 @@ npm run dev
 ```bash
 cd SOAP-web-service
 npm start
-# Server runs on http://localhost:8000
 ```
 
 ---
